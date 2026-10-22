@@ -1,4 +1,8 @@
 import * as THREE from "three";
+import { shadematerial } from "./Shaders";
+
+
+
 
 // Textures
 // Textures has 6 types
@@ -14,7 +18,7 @@ loadingmanager.onLoad = () => {
 };
 
 // Load texture
-const textureloader = new THREE.TextureLoader();
+const textureloader = new THREE.TextureLoader(loadingmanager);
 
 // Load the texture pic
 // textureloader has 4 parametrs one is url and 3 callback funcstions
@@ -37,11 +41,18 @@ const alltextures = {
     },
     // we will use this as textureloader manager this is easy way to track texture
   ),
-
+  
   //------------- Texture 2 ---------------//
-
+  
   marbleTex: textureloader.load("/Textures/Marbles.jpg"),
+  
+  backgroundTex : textureloader.load("https://images.unsplash.com/photo-1791681403982-fe65ea53288f?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+    (texture)=>{
+      shadematerial.uniforms.utexture.value = texture;
+    }
+  )
 };
+console.log('Textureeeeeeeeee',shadematerial.uniforms.utexture);
 
 let marbleTexture = alltextures.marbleTex;
 

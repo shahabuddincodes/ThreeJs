@@ -6,7 +6,7 @@
 
 import * as THREE from "three";
 import { GLTFExporter, GLTFLoader } from "three/examples/jsm/Addons.js";
-// import { scene } from "./main";
+import { scene } from "./main";
 
 let model = "3d model";
 
@@ -23,18 +23,18 @@ gltbLoader.load(
       console.log(gltf.animations, "Length", gltf.animations.length);
       mixer = new THREE.AnimationMixer(models);
 
-      const actions = mixer.clipAction(gltf.animations[3]);
+      const actions = mixer.clipAction(gltf.animations[5]);
 
       // we have to update mixer in animate funstion
-    //   actions.play();
+      actions.play();
     }
 
     const death = THREE.AnimationClip.findByName(gltf.animations, "Death");
 
-    if(death){
-        const deathAction = mixer.clipAction(death)
-        deathAction.play();
-    }
+    // if(death){
+    //     const deathAction = mixer.clipAction(death)
+    //     deathAction.play();
+    // }
 
     scene.add(models);
     console.log("Model Loded");
@@ -47,7 +47,9 @@ gltbLoader.load(
     console.log("Model error");
   },
 );
+console.log('hi');
 
-gltbLoader.sc;
+
+// gltbLoader.sc;
 
 export default model;

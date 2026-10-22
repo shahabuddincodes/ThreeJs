@@ -4,7 +4,11 @@ import * as THREE from "three";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import GUI from "lil-gui";
 import a from "./Filtering.js";
-import  { ambientLight, directionlLight, directionlLightHelper } from "./Lighting.js";
+import {
+  ambientLight,
+  directionlLight,
+  directionlLightHelper,
+} from "./Lighting.js";
 // import model, { mixer } from "./3Dmodel.js";
 
 import alltex from "./textures.js";
@@ -39,8 +43,6 @@ const timer = new THREE.Timer();
 // box
 const geometery = new THREE.BoxGeometry(1, 1, 1); // x-axis, y-axis, z-axis // we have to pass width depth andheight
 
-
-
 //sphere
 
 const Geometrysphere = new THREE.SphereGeometry(15, 32, 16);
@@ -67,25 +69,25 @@ const Geometrysphere = new THREE.SphereGeometry(15, 32, 16);
 
 // Geometry defines the shape; material defines its appearance.
 
-   // //!  const material = new THREE.MeshBasicMaterial({  color: 0xff0000,
-  // //!  wireframe: true,
- // //! map: alltex.marbleTex });
- // or '#ff0000'  // pass color for material
+// const material = new THREE.MeshBasicMaterial({
+// color: 0xff0000,
+// wireframe: true,
+// map: alltex.marbleTex,
+// });
+// or '#ff0000'  // pass color for material
 
 const Standmaterial = new THREE.MeshStandardMaterial({
   color: 0xff0000,
   //chnage envirnmental light intensity
-  envMapIntensity:50,
-  metalness:1,
-  roughness:0.001
-
-}); 
-
+  envMapIntensity: 50,
+  metalness: 1,
+  roughness: 0.001,
+});
 
 // now we create a mesh which is known as cube
 //A mesh combines geometry and material to create a visible 3D object.
 
-// //! const cube = new THREE.Mesh(geometery, material); // we pass geometery and materail here
+// const cube = new THREE.Mesh(geometery, material); // we pass geometery and materail here
 
 // sphere
 //! const sphere = new THREE.Mesh(Geometrysphere, material);
@@ -100,7 +102,7 @@ const cube = new THREE.Mesh(planGeometry, shadematerial);
 
 //! cube.position.x = 20;
 //! cube.position.y = -2
- //! cube.position.z = 2.6;
+// cube.position.z = -2.6;
 
 // to set all axis in one line
 // cube.position.set(0, 0, 0); // x-axis,y-axis, z-axis
@@ -123,15 +125,14 @@ const cube = new THREE.Mesh(planGeometry, shadematerial);
 
 // we have created a scene and object now we have pass object in scene
 
-
 scene.add(cube); // it will placed object in scene
 //! scene.add(custom);
 // scene.add(ambientLight)
-// scene.add(directionlLight)
+scene.add(directionlLight);
 
 // Directional Light Helper
 
-// scene.add(directionlLightHelper)
+scene.add(directionlLightHelper);
 
 // Show the X, Y, and Z axes
 const axesHelper = new THREE.AxesHelper(5);
@@ -143,7 +144,6 @@ scene.add(axesHelper);
 
 // const gridHelper = new THREE.GridHelper(10, 10);
 // scene.add(gridHelper);
-
 
 // now we create camera for watching the scene
 
@@ -158,10 +158,10 @@ const camera = new THREE.PerspectiveCamera(
 // it locks camera on one point
 
 camera.lookAt(0, 0, 0);
-
+camera.position.set(0, 0, 5);
 //! const camera = new THREE.OrthographicCamera(-4, 4, 4, -4, 0.5, 100);
 
-camera.position.z = 4;
+// camera.position.z = 4;
 // camera.position.y = 1;
 // camera.position.x = 1;
 // arguments describe how camera is fit for scene how scene will be look 0.1 and 100 is the limit for
@@ -239,13 +239,13 @@ function animate() {
   timer.update();
   const delta = timer.getDelta();
 
+  //   if (mixer) {
+  //   mixer.update(delta);
+  // }
   if(shadematerial){
     shadematerial.uniforms.utime.value += delta;
   }
-
-  // ⁡⁢⁣⁢if(mixer){
-  //   mixer.update(delta)
-  // }⁡
+  // controls.update();
   //  cube.rotation.y += delta* 0.9
   //! cube.rotation.x += delta* 0.2
   //!  cube.rotation.z += delta* 0.3

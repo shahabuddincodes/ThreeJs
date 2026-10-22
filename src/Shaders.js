@@ -2,6 +2,9 @@
 import * as THREE from "three";
 import vertexShade from './Shaders/vertexShade.glsl'
 import fragmentsShade from './Shaders/fragmentsShade.glsl'
+import alltextures from "./textures";
+
+
 
 // Vertex shader
 
@@ -35,6 +38,7 @@ export const shadematerial = new THREE.ShaderMaterial({
   fragmentShader: fragmentsShade,
   side: THREE.DoubleSide,
   uniforms:{
-    utime:{value:0}
+    utime:{value:0},
+    utexture : {value: ''}
   }
 });
